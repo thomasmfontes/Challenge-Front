@@ -90,3 +90,32 @@ btn.onmousemove = function(e) {
   btn.style.setPrperty('--eixoX', x + 'px')
   btn.style.setPrperty('--eixoY', y + 'px')
 }
+
+document.getElementById('form-contato').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const mensagem = document.getElementById('mensagem').value.trim();
+  const erro = document.getElementById('mensagem-erro');
+  const sucesso = document.getElementById('mensagem-sucesso');
+
+  erro.textContent = '';
+  sucesso.textContent = '';
+
+  const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!nome || !email || !mensagem) {
+    erro.textContent = 'Please fill out all fields.';
+    return;
+  }
+
+  if (!emailValido) {
+    erro.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  // Simulação de envio
+  sucesso.textContent = 'Message sent successfully!';
+  this.reset();
+});
